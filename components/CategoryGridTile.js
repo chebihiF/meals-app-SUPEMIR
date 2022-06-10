@@ -7,7 +7,10 @@ const CategoryGridTile = ({ title, color, onPress }) => {
     <View style={[styles.gridItem, { backgroundColor: color }]}>
       <Pressable
         android_ripple={{ color: "#ccc" }} // Android
-        style={(pressed) => [styles.button, pressed && styles.pressed]} // IOS
+        style={({ pressed }) => [
+          styles.button,
+          pressed ? styles.buttonPressed : null,
+        ]} // IOS
         onPress={onPress}
       >
         <View style={styles.innerContainer}>
