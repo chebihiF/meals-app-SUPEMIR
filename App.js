@@ -7,6 +7,7 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import { CATEGORIES } from "./data/dummy-data";
+import MealDetailScreen from "./screens/MealDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         screenOptions={{
           headerStyle: { backgroundColor: "#351401" },
           headerTintColor: "white",
+          cardStyle: { backgroundColor: "#3f2f25" },
         }}
       >
         <Stack.Screen
@@ -40,6 +42,7 @@ export default function App() {
             };
           }}
         />
+        <Stack.Screen name="MealDetail" component={MealDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

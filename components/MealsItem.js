@@ -1,5 +1,6 @@
 /** @format */
 
+import { useNavigation } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -8,14 +9,22 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import MealDetails from "./MealDetails";
 
 const MealsItem = ({
+  id,
   title,
   imageUrl,
   duration,
   complexity,
   affordability,
 }) => {
+  const navigation = useNavigation();
+
+  const selectMealItemHandler = () => {
+    navigation.navigate("MealDetail", { mealId: id });
+  };
+
   return (
     <View style={styles.mealItem}>
       <Pressable
@@ -24,17 +33,18 @@ const MealsItem = ({
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]} // IOS
+        onPress={selectMealItemHandler}
       >
         <View style={styles.innerContainer}>
           <View>
             <Image style={styles.image} source={{ uri: imageUrl }} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.deatils}>
-            <Text style={styles.detailItem}>{duration}m</Text>
-            <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-          </View>
+          <MealDetails
+            duration={duration}
+            complexity={complexity}
+            affordability={affordability}
+          />
         </View>
       </Pressable>
     </View>
@@ -66,16 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 8,
   },
-  deatils: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
-  },
+
   innerContainer: {
     borderRadius: 8,
     overflow: "hidden",
